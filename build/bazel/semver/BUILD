@@ -1,5 +1,6 @@
 package(default_visibility = ["//visibility:public"])
-load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
+
+load("@rules_proto//proto:defs.bzl", "proto_library")
 
 licenses(["notice"])
 
@@ -8,17 +9,22 @@ proto_library(
     srcs = ["semver.proto"],
 )
 
-java_proto_library(
+alias(
     name = "semver_java_proto",
-    deps = [":semver_proto"],
+    actual = "//build/bazel/semver/java:semver_java_proto",
 )
 
-cc_grpc_library(
+alias(
     name = "semver_cc_proto",
-    srcs = ["semver.proto"],
-    deps = [],
-    proto_only = False,
-    well_known_protos = True,
-    use_external = False,
+    actual = "//build/bazel/semver/cc:semver_cc_proto",
 )
 
+alias(
+    name = "semver_go_proto",
+    actual = "//build/bazel/semver/go:semver_go_proto",
+)
+
+alias(
+    name = "go_default_library",
+    actual = "//build/bazel/semver/go:go_default_library",
+)
