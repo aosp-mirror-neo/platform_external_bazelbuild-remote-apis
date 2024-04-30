@@ -1,5 +1,6 @@
 package(default_visibility = ["//visibility:public"])
-load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
+
+load("@rules_proto//proto:defs.bzl", "proto_library")
 
 licenses(["notice"])
 
@@ -8,32 +9,33 @@ proto_library(
     srcs = ["remote_execution.proto"],
     deps = [
         "//build/bazel/semver:semver_proto",
+        "@com_google_protobuf//:any_proto",
         "@com_google_protobuf//:duration_proto",
         "@com_google_protobuf//:timestamp_proto",
-        "@googleapis//:google_api_annotations_proto",
-        "@googleapis//:google_api_http_proto",
-        "@googleapis//:google_longrunning_operations_proto",
-        "@googleapis//:google_rpc_status_proto",
+        "@com_google_protobuf//:wrappers_proto",
+        "@googleapis//google/api:annotations_proto",
+        "@googleapis//google/api:http_proto",
+        "@googleapis//google/longrunning:operations_proto",
+        "@googleapis//google/rpc:status_proto",
     ],
 )
 
-java_proto_library(
+alias(
     name = "remote_execution_java_proto",
-    deps = [":remote_execution_proto"],
+    actual = "//build/bazel/remote/execution/v2/java:remote_execution_java_proto",
 )
 
-cc_grpc_library(
+alias(
     name = "remote_execution_cc_proto",
-    srcs = ["remote_execution.proto"],
-    deps = [
-        "//build/bazel/semver:semver_cc_proto",
-        "@googleapis//:google_api_annotations_cc_proto",
-        "@googleapis//:google_api_http_cc_proto",
-        "@googleapis//:google_longrunning_operations_cc_proto",
-        "@googleapis//:google_rpc_status_cc_proto",
-    ],
-    proto_only = False,
-    well_known_protos = True,
-    use_external = False,
+    actual = "//build/bazel/remote/execution/v2/cc:remote_execution_cc_grpc",
 )
 
+alias(
+    name = "remote_execution_go_proto",
+    actual = "//build/bazel/remote/execution/v2/go:remote_execution_go_proto",
+)
+
+alias(
+    name = "go_default_library",
+    actual = "//build/bazel/remote/execution/v2/go:go_default_library",
+)
