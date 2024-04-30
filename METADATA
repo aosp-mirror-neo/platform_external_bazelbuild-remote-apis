@@ -1,13 +1,19 @@
-name: "remote-apis"
-description:
-    "An API for caching and execution of actions on a remote system."
+# This project was upgraded with external_updater.
+# Usage: tools/external_updater/updater.sh update external/bazelbuild-remote-apis
+# For more info, check https://cs.android.com/android/platform/superproject/+/main:tools/external_updater/README.md
 
+name: "remote-apis"
+description: "An API for caching and execution of actions on a remote system."
 third_party {
-  url {
-    type: GIT
-    value: "https://github.com/bazelbuild/remote-apis"
-  }
-  version: "6a5a17b77bca5e70417746fd0616db3849731619"
-  last_upgrade_date { year: 2019 month: 4 day: 9 }
   license_type: NOTICE
+  last_upgrade_date {
+    year: 2024
+    month: 4
+    day: 29
+  }
+  identifier {
+    type: "Git"
+    value: "https://github.com/bazelbuild/remote-apis"
+    version: "1f36c310b28d762b258ea577ed08e8203274efae"
+  }
 }
