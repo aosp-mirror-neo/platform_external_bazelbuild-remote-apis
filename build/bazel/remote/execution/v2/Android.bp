@@ -38,6 +38,8 @@ java_library_host {
         ],
         type: "full",
     },
+    // TODO(b/339514031): Unpin tradefed dependencies to Java 11.
+    java_version: "11",
 }
 
 java_library_host {
@@ -60,4 +62,6 @@ java_library_host {
         "libprotobuf-java-full",
         "remote-execution-java-proto",
     ],
+    // TODO(b/339514031): Unpin tradefed dependencies to Java 11.
+    java_version: "11",
 }
